@@ -33,6 +33,50 @@ JSONとは、一言で言うとざっくりと書いたJavaScript。JavaScript�
 ```
 iOSやAndroid, Web AppのフロントからサーバーサイドのAPIを叩いて目的のレスポンスをJSON形式で得ることが多い。
 
+
+### curlコマンド
+curlとは、サーバーからデータを取得したり、サーバーへデータ転送を行うコマンド。
+ローカルで開発するAPIの挙動を確認するときにもよく使われる。
+インストールしていない人はこちらから↓
+https://qiita.com/kaizen_nagoya/items/f13df3e2c9fe6c3bf6fc
+
+実際に使ってみましょう！
+```
+$ curl -X GET http://zipcloud.ibsnet.co.jp/api/search?zipcode=<郵便番号>
+```
+
+以下のようなレスポンスが返ってくると思います。
+```
+{
+	"message": null,
+	"results": [
+		{
+			"address1": "沖縄県",
+			"address2": "宜野湾市",
+			"address3": "我如古",
+			"kana1": "ｵｷﾅﾜｹﾝ",
+			"kana2": "ｷﾞﾉﾜﾝｼ",
+			"kana3": "ｶﾞﾈｺ",
+			"prefcode": "47",
+			"zipcode": "9012214"
+		}
+	],
+	"status": 200
+}
+```
+## HTTPメソッド
+HTTPメソッドとは、クライアントが行いたい処理をサーバに伝えるという役割があるがメソッドはたったの８つだけ。しかもメインで使うのは5つか６つ！
+```
+GET: リソースの取得(Twitterのタイムラインやキーワード検索の結果など)
+POST: リソースへのデータを新規で追加(テキストの投稿機能など)
+PUT: リソースの既存のデータの更新(プロフィール情報の編集など)
+PATCH: こちらも既存のデータの更新, PUTより編集の対象が少ないイメージ(通知が来てほしいメールアドレスの変更など)
+DELETE: 指定したデータの削除(昔つぶやいたテキストの削除など)
+```
+
+## HTTPステータスコード
+Webサーバーからのレスポンスの意味を表す三桁のコード
+https://ja.wikipedia.org/wiki/HTTP%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89
 ## ER図
 ![エビフライトライアングル](https://user-images.githubusercontent.com/22650969/54347920-53b0b980-468b-11e9-844d-6f591d652c2e.png "サンプル")
 
