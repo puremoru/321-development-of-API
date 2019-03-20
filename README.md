@@ -128,14 +128,125 @@ curl --request POST
 {"status": 401, "message": "認証に失敗しました"}
 ```
 ### ユーザー一覧API
+- request
+```
+$ curl --request GET \
+--url http://localhost:3000/api/v1/users \
+--header 'Content-Type: application/json' \
+```
+- response
+```
+[
+  {
+    "name": "puremoru0315",
+  },
+  {...
+  }
+]
+```
+
 ### ユーザー詳細API
+- request
+```
+$ curl --request GET \
+--url http://localhost:3000/api/v1/users/1 \
+--header 'Content-Type: application/json' \
+```
+- response
+```
+{"name": "puremoru0315", "description": "hogehoge, hello, world"}
+```
 ### 自分のタスク一覧API
+- request
+```
+$ curl --request GET \
+--url http://localhost:3000/api/v1/todos \
+--header 'Authorization: Basic eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNvY29va2luZ0BsaXZlLmpwIiwicGFzc3dvcmQiOiJjb2Nvb2tpbmcifQ.X5TV5RG_SlFSUl_8-QU3n5PixmVpex2Nsp1ziWryeXc' \
+--header 'Content-Type: application/json' \
+```
+- response 
+```
+[
+  {
+    "title": "たすく1",
+    "status": 1
+  }, 
+  {
+    "title": "たすく2",
+    "status": 0
+  }, ....
+]
+```
+- ログイン時に発行されたトークンを渡していないとき, またはトークンが不正のとき
+```
+{"status": 401, "message": "ログインしてください"}
+```
 ### 自分のタスクの詳細API
+- request 
+```
+$ curl --request GET \
+--url http://localhost:3000/api/v1/todos/2 \
+--header 'Authorization: Basic eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNvY29va2luZ0BsaXZlLmpwIiwicGFzc3dvcmQiOiJjb2Nvb2tpbmcifQ.X5TV5RG_SlFSUl_8-QU3n5PixmVpex2Nsp1ziWryeXc' \
+--header 'Content-Type: application/json' \
+```
+- response 
+```
+{"title": "たすく1", "description": "これが終わったら遊べるぞー", "status": 0}
+```
+- ログイン時に発行されたトークンを渡していないとき, またはトークンが不正のとき
+```
+{"status": 401, "message": "ログインしてください"}
+```
 ### 自分のタスク作成API
+- request
+```
+$ curl \             
+-F title=たすく \
+-F description=テスト説明 \
+http://localhost:3000/api/v1/todos \
+-H 'Authorization: Token eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZhdHpzam9uQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiZmF0empvbjEyMiJ9.Ei1Ojd6dbSOJmJAqmOOmH3TBEFDKnNKVpdsxmB2l9rc' \
+```
+- response 
+```
+{"status": 200, "message": "タスクを作成しました"}
+```
 - タスクのタイトルの入力チェック
+```
+{"status": 400, "message": "タイトルを入力してください"}
+```
 - `status`の初期値は0(未着手)にする
-### 自分のタスクの更新API
+### 自分のタスクのステータス更新API
 - 未着手→着手中, 着手中→済にそれぞれ更新する
 - 自分以外が更新できないようにする
+- request 
+```
+$ curl --request PATCH \
+--url http://localhost:3000/api/v1/todos/1 \
+--header 'Authorization: Basic eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNvY29va2luZ0BsaXZlLmpwIiwicGFzc3dvcmQiOiJjb2Nvb2tpbmcifQ.X5TV5RG_SlFSUl_8-QU3n5PixmVpex2Nsp1ziWryeXc' \
+--header 'Content-Type: application/json' \
+```
+- response 
+```
+{"status": 200, "message": "タスクのステータスを更新しました"}
+```
+- ログイン時に発行されたトークンを渡していないとき, またはトークンが不正のとき
+```
+{"status": 401, "message": "ログインしてください"}
+```
 ### 自分のタスクの削除API
 - 自分以外が更新できないようにする
+- request
+```
+$ curl --request DELETE \
+--url http://localhost:3000/api/v1/todos/1 \
+--header 'Authorization: Basic eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNvY29va2luZ0BsaXZlLmpwIiwicGFzc3dvcmQiOiJjb2Nvb2tpbmcifQ.X5TV5RG_SlFSUl_8-QU3n5PixmVpex2Nsp1ziWryeXc' \
+--header 'Content-Type: application/json' \
+```
+- response 
+```
+{"status": 200, "message": "タスクを削除しました"}
+```
+- ログイン時に発行されたトークンを渡していないとき, またはトークンが不正のとき
+```
+{"status": 401, "message": "ログインしてください"}
+```
