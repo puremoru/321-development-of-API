@@ -262,3 +262,6 @@ $ curl --request DELETE \
 ```
 {"status": 403, "message": "権限がありません"}
 ```
+## 最後に
+WebAPI開発、いかがでしたでしょうか？？こういうのもあるんだーと知って勉強するきっかけになれば幸いです。また、もっとWeb APIについて勉強したいという方はこちらもおすすめです！↓
+https://www.amazon.co.jp/Web-API-Parts-%E6%B0%B4%E9%87%8E-%E8%B2%B4%E6%98%8E/dp/4873116864/ref=sr_1_1?ie=UTF8&qid=1553076582&sr=8-1&keywords=web+api
