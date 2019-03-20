@@ -83,9 +83,50 @@ https://ja.wikipedia.org/wiki/HTTP%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%
 
 ## Web API設計書
 ### ユーザー新規登録API
+- request 
+```
+curl --request POST
+--url http://localhost:3000/api/v1/users
+--header 'Content-Type: application/json'
+--data '{ 
+"name": "testuser"
+"email": "mizutama12120329@gmail.com",
+"password": "password"
+}
+'
+```
+- response
+```
+{"status": 200, message: "ユーザー登録が完了しました"}
+```
 - メールアドレスとパスワードそれぞれの入力チェックも
+```
+{"status": 400, "message": "メールアドレスを入力してください"}
+```
 ### ユーザーログインAPI
+- request
+```
+curl --request POST
+--url http://localhost:3000/api/v1/users/login
+--header 'Content-Type: application/json'
+--data '{ 
+"email": "mizutama12120329@gmail.com",
+"password": "password"
+}
+'
+```
+- response 
+```
+{"access_token": xxxxxxxx}
+```
 - メールアドレスとパスワードそれぞれの入力チェックも
+```
+{"status": 400, "message": "メールアドレスを入力してください"}
+```
+- 入力されたアドレスとパスワードからユーザーが見つからなかったとき
+```
+{"status": 401, "message": "認証に失敗しました"}
+```
 ### ユーザー一覧API
 ### ユーザー詳細API
 ### 自分のタスク一覧API
