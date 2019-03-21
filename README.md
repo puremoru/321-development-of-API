@@ -127,6 +127,7 @@ curl --request POST
 ```
 {"status": 401, "message": "認証に失敗しました"}
 ```
+※ JWT認証
 ### ユーザー一覧API
 - request
 ```
